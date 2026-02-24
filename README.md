@@ -1,4 +1,4 @@
-# RitualPulse v1.2
+# RitualPulse v1.0
 
 Plugin Paper/Spigot orienté rétention:
 - daily rewards
