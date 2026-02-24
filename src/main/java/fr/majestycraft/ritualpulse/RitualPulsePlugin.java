@@ -101,7 +101,7 @@ public class RitualPulsePlugin extends JavaPlugin {
         cmd.setExecutor(cmdExecutor);
         cmd.setTabCompleter(cmdExecutor);
 
-        getServer().getPluginManager().registerEvents(new RitualListener(ritualGui), this);
+        getServer().getPluginManager().registerEvents(new RitualListener(this, ritualGui, ritualService), this);
     }
 
     private void registerPlaceholderIfNeeded() {

@@ -5,8 +5,14 @@ lang: "fr"
 time-zone: "Europe/Paris"
 debug: false
 
+join-open:
+  enabled: false
+  delay-ticks: 20 # 20 ticks = 1 sec (plus safe qu'instant au join)
+  only-when-can-claim: true
+  dont-open-if-other-gui-open: true
+
 storage:
-  type: "YAML" # YAML | SQLITE | MYSQL
+  type: "YAML" # YAML | MYSQL
   yaml-file: "data.yml"
 
   sqlite:
