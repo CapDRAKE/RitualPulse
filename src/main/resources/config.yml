@@ -1,0 +1,157 @@
+# RitualPulse config principal
+# note: tu peux /ritual reload apres modif (evite en plein spam joueur quand meme)
+
+lang: "fr"
+time-zone: "Europe/Paris"
+debug: false
+
+storage:
+  type: "YAML" # YAML | SQLITE | MYSQL
+  yaml-file: "data.yml"
+
+  sqlite:
+    file: "ritualpulse.db"
+
+  mysql:
+    host: "127.0.0.1"
+    port: 3306
+    database: "minecraft"
+    username: "root"
+    password: "change_me"
+    table-prefix: "ritualpulse_"
+    use-ssl: false
+    pool-size: 10
+
+claim:
+  cooldown-hours: 20
+  streak-deadline-hours: 36
+
+streak:
+  freeze:
+    enabled: true
+    start-tokens: 0
+    grant-every-10-claims: 10
+    max-tokens: 3
+
+  comeback:
+    enabled: true
+    min-previous-streak: 3
+    commands:
+      - "eco give %player% 250"
+      - "tellraw %player% {\"text\":\"Bonus comeback ! Tu es revenu après une pause.\",\"color\":\"gold\"}"
+
+lucky-hour:
+  enabled: true
+  start: "18:00"
+  end: "20:00"
+  commands:
+    - "eco give %player% 150"
+
+vip-bonuses:
+  vip:
+    permission: "group.vip"
+    commands:
+      - "crate key give %player% vote 1"
+  elite:
+    permission: "group.elite"
+    commands:
+      - "crate key give %player% epic 1"
+
+milestones:
+  "7":
+    commands:
+      - "eco give %player% 500"
+      - "broadcast &a%player% a atteint une streak de &e7 jours&a !"
+  "14":
+    commands:
+      - "eco give %player% 1000"
+  "30":
+    commands:
+      - "crate key give %player% legendary 1"
+      - "broadcast &6%player% a atteint une streak de &e30 jours &6sur RitualPulse !"
+
+rewards:
+  cycle-size: 7
+  days:
+    "1":
+      material: "LIME_DYE"
+      display: "&aJour 1"
+      lore:
+        - "&7Récompense de base"
+      commands:
+        - "eco give %player% 100"
+    "2":
+      material: "YELLOW_DYE"
+      display: "&eJour 2"
+      lore:
+        - "&7Un peu mieux"
+      commands:
+        - "eco give %player% 150"
+    "3":
+      material: "ORANGE_DYE"
+      display: "&6Jour 3"
+      lore:
+        - "&7Ça monte"
+      commands:
+        - "eco give %player% 200"
+    "4":
+      material: "LIGHT_BLUE_DYE"
+      display: "&bJour 4"
+      lore:
+        - "&7Toujours présent"
+      commands:
+        - "eco give %player% 250"
+    "5":
+      material: "BLUE_DYE"
+      display: "&9Jour 5"
+      lore:
+        - "&7Belle régularité"
+      commands:
+        - "eco give %player% 300"
+    "6":
+      material: "PURPLE_DYE"
+      display: "&5Jour 6"
+      lore:
+        - "&7Presque la fin du cycle"
+      commands:
+        - "eco give %player% 350"
+    "7":
+      material: "RED_DYE"
+      display: "&cJour 7"
+      lore:
+        - "&7Fin de cycle !"
+        - "&eBonus spécial"
+      commands:
+        - "eco give %player% 500"
+        - "crate key give %player% vote 1"
+
+gui:
+  title: "&6&lRitualPulse &8- &fRécompenses"
+  size: 27
+  fill-material: "BLACK_STAINED_GLASS_PANE"
+  items:
+    claim-slot: 13
+    stats-slot: 11
+    timing-slot: 15
+    close-slot: 26
+    preview-slots: [19, 20, 21, 22, 23, 24, 25]
+    info-slot: 4
+    filler-name: " "
+  icons:
+    claim-ready: "CHEST"
+    claim-cooldown: "CLOCK"
+    stats: "BOOK"
+    timing: "COMPASS"
+    close: "BARRIER"
+    info: "NETHER_STAR"
+
+
+command-execution:
+  # securite anti duplication crash: on save l'etat avant d'executer les commandes
+  persist-before-dispatch: true
+  warn-on-fail: true
+  stop-on-first-fail: false
+
+placeholders:
+  enabled: true
+  identifier: "ritualpulse"
